@@ -1,0 +1,22 @@
+.activeFile {
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.activeFile:active {
+  background-color: navy !important;
+  color: white !important;
+}
+.active {
+  background-color: navy !important;
+  color: white !important;
+}
+.container {
+  border: 2px solid gainsboro;
+  height: 600px;
+}
+
+.file_ListDisplay {
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
