@@ -51,17 +51,38 @@ const FolderListContextProvider = (props) => {
 
     const folderListTraverse = (folderList, id, obj) => {
 
-        folderList.forEach( e => {
-            if(e.id === id) {
-                e.children.push(obj);
-                return folderList;
-            }
+        const findFolder = folderList.find(e => {
 
+            if(e.id === id) {
+                return e;
+            }
+            
             if(e.children.length > 0) {
                 folderListTraverse(e.children, id, obj)
             }
-        })
-        return folderList;
+
+            return undefined;
+        });
+
+        if(findFolder) {
+            findFolder.children.push(obj);
+    
+            setFolders([...folders])
+        } else {
+            console.log('error: id not found!!!')
+        }
+
+        // folderList.forEach( e => {
+        //     if(e.id === id) {
+        //         e.children.push(obj);
+        //         return folderList;
+        //     }
+
+        //     if(e.children.length > 0) {
+        //         folderListTraverse(e.children, id, obj)
+        //     }
+        // })
+        // return folderList;
     }
 
     const addFolder = (name) => {
@@ -71,10 +92,10 @@ const FolderListContextProvider = (props) => {
                 id: uuidv4(),
                 children: []
             })
+            setFolders([...folders])
         } else {
             folderListTraverse(folders, selectedFolderId, {name,id:uuidv4(),children:[]})
         }
-        setFolders([...folders])
     }
 
     const selectFolder = id => {
